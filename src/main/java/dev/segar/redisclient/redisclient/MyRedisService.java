@@ -27,11 +27,34 @@ public class MyRedisService {
     public void onload() {
         System.out.println("redisTemplate = " + redisTemplate);
 
-        for(int i=0; i<100000; i++) {
-            Instant start = Instant.now();
-            String x = redisTemplate.opsForValue().get("SAMPLE");
-            Instant end = Instant.now();
-            System.out.println("timeTake(start, end) = " + String.format("%.3f", timeTake(start, end)/1000) + " x= " + x);
+        for(int i=0; i<10; i++) {
+            if(i==0) {
+                Instant start = Instant.now();
+                String x = redisTemplate.opsForValue().get("SAMPLE");
+                Instant end = Instant.now();
+                System.out.println("timeTake(start, end) = " + String.format("%.3f", timeTake(start, end)/1000) + " SAMPLE= " + x);
+            }
+
+            if(i==1) {
+                Instant start = Instant.now();
+                String x = redisTemplate.opsForValue().get("SAMPLE1");
+                Instant end = Instant.now();
+                System.out.println("timeTake(start, end) = " + String.format("%.3f", timeTake(start, end)/1000) + " SAMPLE1= " + x);
+            }
+
+            if(i==2) {
+                Instant start = Instant.now();
+                String x = redisTemplate.opsForValue().get("SAMPLE2");
+                Instant end = Instant.now();
+                System.out.println("timeTake(start, end) = " + String.format("%.3f", timeTake(start, end)/1000) + " SAMPLE2= " + x);
+            }
+
+            if(i>2) {
+                Instant start = Instant.now();
+                System.out.println("timeTake(start, end) = " + String.format("%.3f", timeTake(start,  Instant.now())/1000) + " SAMPLE= " + redisTemplate.opsForValue().get("SAMPLE"));
+                System.out.println("timeTake(start, end) = " + String.format("%.3f", timeTake(start,  Instant.now())/1000) + " SAMPLE= " + redisTemplate.opsForValue().get("SAMPLE1"));
+                System.out.println("timeTake(start, end) = " + String.format("%.3f", timeTake(start,  Instant.now())/1000) + " SAMPLE= " + redisTemplate.opsForValue().get("SAMPLE2"));
+            }
         }
 
 
